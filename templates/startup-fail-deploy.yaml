@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         app: startup-fail
+        mode: startup
     spec:
       containers:
       - name: rest
