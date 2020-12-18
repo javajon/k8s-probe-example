@@ -9,11 +9,11 @@ spec:
   selector:
     matchLabels:
       app: startup-pass
-      mode: startup
   template:
     metadata:
       labels:
         app: startup-pass
+        mode: startup
     spec:
       containers:
       - name: rest
