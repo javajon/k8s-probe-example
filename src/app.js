@@ -23,7 +23,7 @@ app.get('/readyz', (req, res) => {
   // In Startup mode
   if (startupDuration > 0) {
     if (uptime > startupDuration)
-       res.send("I'm ready!")
+      res.send("I'm ready!")
     else
       res.status(500).json({ error: "Shut the door, I'm not ready yet"})   
   }

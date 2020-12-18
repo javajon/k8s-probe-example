@@ -16,13 +16,14 @@ spec:
         mode: startup
     spec:
       containers:
-      - name: rest
+      - name: app
         image: $REGISTRY/k8s-probe-example:0.1.0
         ports:
-        - containerPort: 3000
+        - name: rest
+          containerPort: 3000
         env:
-          - name: STARTUP_DURATION
-            value: "30"
+        - name: STARTUP_DURATION
+          value: "30"
         startupProbe:
           httpGet:
             path: /readyz
