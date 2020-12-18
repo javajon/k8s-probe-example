@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: rest
-        image: $REGISTRY:k8s-probe-example:0.1.0
+        image: $REGISTRY/k8s-probe-example:0.1.0
         ports:
         - containerPort: 3000
         env:

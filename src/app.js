@@ -11,7 +11,7 @@ function incrementUptime() {
 var cancel = setInterval(incrementUptime, 1000);
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Hello! Yes, I understand what you are saying.')
 })
 
 app.get('/uptime', (req, res) => {
