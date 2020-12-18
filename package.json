@@ -1,0 +1,9 @@
+{
+    "name": "k8s-probe-example",
+    "description": "For demonstrating Kubernetes Probes",
+    "version": "1.0.0",
+    "url": "http://www.dijure/com/",
+    "dependencies": {
+        "express": "4.17.1"
+    }
+}
