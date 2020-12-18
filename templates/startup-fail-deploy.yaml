@@ -21,9 +21,10 @@ spec:
         - containerPort: 3000
         env:
           - name: STARTUP_DURATION
-            value: 60
+            value: "60"
         startupProbe:
           httpGet:
             path: /readyz
+            port: rest
           failureThreshold: 6
           periodSeconds: 5
