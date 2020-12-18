@@ -3,6 +3,7 @@
     "description": "For demonstrating Kubernetes Probes",
     "version": "1.0.0",
     "url": "http://www.dijure/com/",
+    "main": "app.js",
     "dependencies": {
         "express": "4.17.1"
     }
