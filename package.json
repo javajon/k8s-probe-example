@@ -4,7 +4,16 @@
     "version": "1.0.0",
     "url": "http://www.dijure/com/",
     "main": "app.js",
+    "license": "MIT",
     "dependencies": {
         "express": "4.17.1"
+    },
+    "scripts": {
+        "start": "node app.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "k8s-probe-example"
     }
 }
