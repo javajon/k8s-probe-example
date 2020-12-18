@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/uptime', (req, res) => {
-  res.send("Uptime: " + uptime + "startupDuration: " + startupDuration)
+  res.send("Uptime: " + uptime + ", startupDuration: " + startupDuration)
 })
 
 app.get('/readyz', (req, res) => {
@@ -26,6 +26,9 @@ app.get('/readyz', (req, res) => {
        res.send("I'm ready!")
     else
       res.status(500).json({ error: "Shut the door, I'm not ready yet"})   
+  }
+  else {
+    res.send("I'm ready!")
   }
 })
 
