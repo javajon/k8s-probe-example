@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: probe-example-startup
+spec:
+  ports:
+  - name: rest
+    nodePort: 33000
+    port: 3000
+    protocol: TCP
+  selector:
+    app: probe-example-startup
+  type: NodePort

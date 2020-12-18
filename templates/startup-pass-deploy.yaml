@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: startup-pass
+  labels:
+    app: prober
+    mode: startup
+spec:
+  selector:
+    matchLabels:
+      app: startup-pass
+  template:
+    metadata:
+      labels:
+        app: startup-pass
+    spec:
+      containers:
+      - name: rest
+        image: $REGISTRY:k8s-probe-example:0.1.0
+        ports:
+        - containerPort: 3000
+        env:
+          - name: STARTUP_DURATION
+            value: 10
+        startupProbe:
+          httpGet:
+            path: /readyz
+          failureThreshold: 6
+          periodSeconds: 5
