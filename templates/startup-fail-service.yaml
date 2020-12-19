@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: probe-example-startup
+  name: startup-fail
 spec:
   ports:
   - name: rest
@@ -9,5 +9,5 @@ spec:
     port: 3000
     protocol: TCP
   selector:
-    app: probe-example-startup
+    app: startup-fail
   type: NodePort
