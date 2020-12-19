@@ -10,26 +10,30 @@ function incrementUptime() {
 
 var cancel = setInterval(incrementUptime, 1000);
 
+function isStartupMode() {
+  return startupDuration > 0
+}
+
 app.get('/', (req, res) => {
-  res.send('Hello! Yes, I understand what you are saying.')
+  res.send("Hello! Yes, I understand what you are saying.")
 })
 
 app.get('/uptime', (req, res) => {
   res.send("Uptime: " + uptime + ", startupDuration: " + startupDuration)
 })
 
-app.get('/readyz', (req, res) => {
-
-  // In Startup mode
-  if (startupDuration > 0) {
-    if (uptime > startupDuration)
-      res.send("I'm ready!")
-    else
-      res.status(500).json({ error: "Shut the door, I'm not ready yet"})   
+app.get('/livez', (req, res) => {
+  if (isStartupMode() && uptime < startupDuration) {
+      res.status(500).json({ error: "I'm either unborn or a zombie. (uptime " + uptime + " seconds)"})   
   }
   else {
-    res.send("I'm ready!")
+    res.send("I'm alive! (uptime " + uptime + " seconds)")
   }
+})
+
+app.get('/readyz', (req, res) => {
+  res.status(500).json({ error: "Shut the door, I'm not ready yet. (uptime " + uptime + " seconds)"})   
+  // res.send("I'm ready!")
 })
 
 app.listen(port, () => {
