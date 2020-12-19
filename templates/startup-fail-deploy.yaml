@@ -3,17 +3,15 @@ kind: Deployment
 metadata:
   name: startup-fail
   labels:
-    app: prober
-    mode: startup
+    app: probe-example
 spec:
   selector:
     matchLabels:
-      app: startup-fail
+      app: probe-example
   template:
     metadata:
       labels:
-        app: startup-fail
-        mode: startup
+        app: probe-example
     spec:
       containers:
       - name: app
@@ -23,10 +21,10 @@ spec:
           containerPort: 3000
         env:
         - name: STARTUP_DURATION
-          value: "90"
+          value: "120"
         startupProbe:
           httpGet:
             path: /livez
             port: rest
-          failureThreshold: 6
+          failureThreshold: 3
           periodSeconds: 10

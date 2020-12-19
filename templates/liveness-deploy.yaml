@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: startup-pass
+  name: liveness-example
   labels:
     app: probe-example
 spec:
@@ -19,12 +19,11 @@ spec:
         ports:
         - name: rest
           containerPort: 3000
-        env:
-        - name: STARTUP_DURATION
-          value: "30"
-        startupProbe:
+        livenessProbe:
           httpGet:
             path: /livez
             port: rest
-          failureThreshold: 6
-          periodSeconds:  10
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 2
+          failureThreshold: 3
