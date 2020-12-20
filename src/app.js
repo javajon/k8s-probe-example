@@ -2,6 +2,7 @@ const express = require('express');
 
 const app = express();
 const port = 3000;
+const podNameGenerated = process.env.POD_NAME_GENERATED || "Undefined"
 
 app.use(express.json());
 
@@ -39,7 +40,7 @@ function isReadinessMode() {
 }
 
 app.get('/', (req, res) => {
-    res.send("Hello! Yes, I understand what you are saying.");
+    res.send("Hello! Yes, I understand what you are saying. I'm Pod " + podNameGenerated);
 });
 
 app.get('/uptime', (req, res) => {
@@ -67,10 +68,11 @@ app.get('/readyz', (req, res) => {
     if (isReadinessMode()) {
         res.status(500).json({
             error: "Shut the door, I'm not ready yet.",
-            readinessCountdown, readinessCountdown
+            readinessCountdown, readinessCountdown,
+            podNameGenerated, podNameGenerated
         });
     } else
-        res.send("I'm ready.");
+        res.send("I'm ready. I'm Pod: " + podNameGenerated);
 });
 
 app.get('/diagz', (req, res) => {

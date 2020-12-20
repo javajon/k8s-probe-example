@@ -20,6 +20,11 @@ spec:
         ports:
         - name: rest
           containerPort: 3000
+        env:
+        - name: POD_NAME_GENERATED
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.generatename
         livenessProbe:
           httpGet:
             path: /readyz
