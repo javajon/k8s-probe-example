@@ -20,7 +20,7 @@ spec:
         ports:
         - name: rest
           containerPort: 3000
-        livenessProbe:
+        readinessProbe:
           httpGet:
             path: /readyz
             port: rest
