@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: readiness-example
+  labels:
+    app: probe-example
+spec:
+  selector:
+    matchLabels:
+      app: probe-example
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: probe-example
+    spec:
+      containers:
+      - name: app
+        image: $REGISTRY/k8s-probe-example:0.1.0
+        ports:
+        - name: rest
+          containerPort: 3000
+        livenessProbe:
+          httpGet:
+            path: /readyz
+            port: rest
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 2
+          failureThreshold: 3
