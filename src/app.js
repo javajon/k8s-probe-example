@@ -2,7 +2,7 @@ const express = require('express');
 
 const app = express();
 const port = 3000;
-const podNameGenerated = process.env.POD_NAME_GENERATED || "Undefined"
+const podNameGenerated = process.env.HOSTNAME || "Undefined"
 
 app.use(express.json());
 
