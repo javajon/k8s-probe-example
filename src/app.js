@@ -40,7 +40,7 @@ function isReadinessMode() {
 }
 
 app.get('/', (req, res) => {
-    res.send("Hello! Yes, I understand what you are saying. I'm Pod " + podNameGenerated);
+    res.send("Hello! Yes, I understand what you are saying. I'm Pod '" + podNameGenerated + "'");
 });
 
 app.get('/uptime', (req, res) => {
