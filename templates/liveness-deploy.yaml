@@ -25,5 +25,4 @@ spec:
             port: rest
           initialDelaySeconds: 5
           periodSeconds: 10
-          timeoutSeconds: 2
           failureThreshold: 3
