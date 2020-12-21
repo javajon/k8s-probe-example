@@ -17,6 +17,7 @@ spec:
       containers:
       - name: app
         image: $REGISTRY/k8s-probe-example:0.1.0
+        imagePullPolicy: Always
         ports:
         - name: rest
           containerPort: 3000
