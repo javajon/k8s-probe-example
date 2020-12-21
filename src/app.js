@@ -75,24 +75,18 @@ app.get("/livez", (req, res) => {
 });
 
 app.get("/readyz", (req, res) => {
-    if (isReadinessMode()) {
-        if (readinessCountdown == 0)
-            res.status(500).json({
-                error: "Shut the door, I'm busy!",
-                readinessCountdown, readinessCountdown,
-                podNameGenerated, podNameGenerated
-            });
-        else
-            res.json({
-                message: "I'm ready, but soon will be on the dark side of the moon.",
-                readinessCountdown, readinessCountdown,
-                podNameGenerated, podNameGenerated
-            });
-    } else
+    if (readinessCountdown > 0) {
+        res.status(500).json({
+            error: "Shut the door, I'm busy!",
+            readinessCountdown, readinessCountdown,
+            podNameGenerated, podNameGenerated
+        });
+    } else {
         res.json({
             message: "I'm ready!",
             podNameGenerated, podNameGenerated
         });
+    }
 });
 
 app.get("/diagz", (req, res) => {
