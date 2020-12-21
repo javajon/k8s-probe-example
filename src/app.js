@@ -13,38 +13,37 @@ var readinessCountdown = -1;
 var uptime = 0;
 
 function periodicUpdates() {
-    uptime += 1;
-    if (isStartupMode()) {
-      startupCountdown -= 1;
-    }
-    if (isLivenessMode()) {
-        livenessCountdown -= 1;
-    }
-    if (isReadinessMode()) {
-        readinessCountdown -= 1;
-    }
+    uptime++;
+    startupCountdown = startupCountdown > 0 ? startupCountdown-- : 0;
+    livenessCountdown = livenessCountdown > 0 ? livenessCountdown-- : 0;
+    readinessCountdown = readinessCountdown > 0 ? readinessCountdown-- : 0;
 }
 
 var cancel = setInterval(periodicUpdates, 1000);
 
 function isStartupMode() {
-    return startupCountdown > 0;
+    return startupCountdown > -1;
 }
 
 function isLivenessMode() {
-    return livenessCountdown > 0;
+    return livenessCountdown > -1;
 }
 
 function isReadinessMode() {
-    return readinessCountdown > 0;
+    return readinessCountdown > -1;
 }
 
 app.get("/", (req, res) => {
-    res.send("Hello! Yes, I understand what you are saying. I'm Pod '" + podNameGenerated + "'");
+    res.json({
+        message: "Hello! Yes, I understand what you are saying.",
+        podNameGenerated: podNameGenerated
+    });
 });
 
 app.get("/uptime", (req, res) => {
-    res.send("Uptime: " + uptime + ", startupDuration: " + startupDuration);
+    res.json({
+        uptime: uptime
+    });
 });
 
 app.get("/livez", (req, res) => {
