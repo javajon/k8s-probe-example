@@ -1,0 +1,1 @@
+The code here supports the [Katacoda scenario that teaches the importance of Kubernetes Probes](https://katacoda.com/javajon/courses/kubernetes-fundamentals/probes). Got 30 minutes? It's free, give it a try! Your feedback welcome!
