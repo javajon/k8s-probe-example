@@ -15,7 +15,7 @@ var uptime = 0;
 function periodicUpdates() {
     uptime += 1;
     if (isStartupMode()) {
-        startupCountdown -= 1;
+      startupCountdown -= 1;
     }
     if (isLivenessMode()) {
         livenessCountdown -= 1;
@@ -56,21 +56,21 @@ app.get("/livez", (req, res) => {
         if (livenessCountdown == 0) {
             res.status(500).json({
                 error: "The parasitoid has done it's dirty deed, I'm dead.",
-                livenessCountdown: livenessCountdown,
-                podNameGenerated: podNameGenerated
+                livenessCountdown, livenessCountdown,
+                podNameGenerated, podNameGenerated
             });
         } else {
             res.json({
                 message: "I'm alive, but I have a parasitoid. Uh oh.",
-                livenessCountdown: livenessCountdown,
-                podNameGenerated: podNameGenerated
+                livenessCountdown, livenessCountdown,
+                podNameGenerated, podNameGenerated
             });
         }
     } else {
         res.json({
             message: "I'm alive.",
-            uptime: uptime,
-            podNameGenerated: podNameGenerated
+            uptime, uptime,
+            podNameGenerated, podNameGenerated
         });
     }
 });
@@ -80,30 +80,30 @@ app.get("/readyz", (req, res) => {
         if (readinessCountdown == 0)
             res.status(500).json({
                 error: "Shut the door, I'm busy!",
-                readinessCountdown: readinessCountdown,
-                podNameGenerated: podNameGenerated
+                readinessCountdown, readinessCountdown,
+                podNameGenerated, podNameGenerated
             });
         else
             res.json({
                 message: "I'm ready, but soon will be on the dark side of the moon.",
-                readinessCountdown: readinessCountdown,
-                podNameGenerated: podNameGenerated
+                readinessCountdown, readinessCountdown,
+                podNameGenerated, podNameGenerated
             });
     } else
         res.json({
             message: "I'm ready!",
-            podNameGenerated: podNameGenerated
+            podNameGenerated, podNameGenerated
         });
 });
 
 app.get("/diagz", (req, res) => {
     res.json({
         startupDemo: isStartupMode(),
-        livenessDemo: isDemoLivenessMode(),
+        livenessDemo: isLivenessMode(),
         uptime: uptime,
         startupCountdown: startupCountdown,
         livenessCountdown: livenessCountdown,
-        readinessCountdown: readinessCountdown
+        readinessCountdown, readinessCountdown
     });
 });
 
@@ -111,15 +111,15 @@ app.post("/parasitoid", (req, res) => {
     livenessCountdown = req.body.livenessCountdown;
     res.json({
         message: "Queue the FBI theme music... This application will self destruct in a few seconds",
-        livenessCountdown: livenessCountdown
+        livenessCountdown, livenessCountdown
     });
 });
 
-app.post("/calculate", (req, res) => {
+app.post('/calculate', (req, res) => {
     readinessCountdown = req.body.readinessCountdown;
     res.json({
         message: "Calculating the meaning of life, I'll be done in a few seconds",
-        readinessCountdown: readinessCountdown
+        readinessCountdown, readinessCountdown
     });
 });
 
