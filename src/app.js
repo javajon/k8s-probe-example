@@ -14,9 +14,9 @@ var uptime = 0;
 
 function periodicUpdates() {
     uptime++;
-    startupCountdown = startupCountdown > 0 ? --startupCountdown : 0;
-    livenessCountdown = livenessCountdown > 0 ? --livenessCountdown : 0;
-    readinessCountdown = readinessCountdown > 0 ? --readinessCountdown : 0;
+    startupCountdown = startupCountdown > 0 ? --startupCountdown : startupCountdown;
+    livenessCountdown = livenessCountdown > 0 ? --livenessCountdown : livenessCountdown;
+    readinessCountdown = readinessCountdown > 0 ? --readinessCountdown : readinessCountdown;
 }
 
 var cancel = setInterval(periodicUpdates, 1000);
