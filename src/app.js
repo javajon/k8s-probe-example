@@ -28,11 +28,11 @@ function periodicUpdates() {
 var cancel = setInterval(periodicUpdates, 1000);
 
 function isStartupMode() {
-    return startupCountdown > -1;
+    return startupCountdown > 0;
 }
 
 function isLivenessMode() {
-    return livenessCountdown > -1;
+    return livenessCountdown > 0;
 }
 
 function isReadinessMode() {
