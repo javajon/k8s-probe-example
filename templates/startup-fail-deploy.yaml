@@ -4,6 +4,7 @@ metadata:
   name: startup-fail
   labels:
     app: probe-example
+    example: startup-fail
 spec:
   selector:
     matchLabels:

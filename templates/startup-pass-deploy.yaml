@@ -4,6 +4,7 @@ metadata:
   name: startup-pass
   labels:
     app: probe-example
+    example: startup-pass
 spec:
   selector:
     matchLabels:
