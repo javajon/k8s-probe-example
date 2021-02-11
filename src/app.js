@@ -14,7 +14,7 @@ var uptime = 0;
 
 function periodicUpdates() {
     uptime++;
-    startupCountdown = startupCountdown > 0 ? --startupCountdown : startupCountdown;
+    startupCountdown = startupCountdown >= 0 ? --startupCountdown : startupCountdown;
     livenessCountdown = livenessCountdown > 0 ? --livenessCountdown : livenessCountdown;
     readinessCountdown = readinessCountdown > 0 ? --readinessCountdown : readinessCountdown;
 }
@@ -59,14 +59,14 @@ app.get("/livez", (req, res) => {
                 podNameGenerated, podNameGenerated
             });
         } else {
-            res.json({
+            res.status(200).json({
                 message: "I'm alive, but I have a parasitoid. Uh oh.",
                 livenessCountdown, livenessCountdown,
                 podNameGenerated, podNameGenerated
             });
         }
     } else {
-        res.json({
+        res.status(200).json({
             message: "I'm alive.",
             uptime, uptime,
             podNameGenerated, podNameGenerated
@@ -82,7 +82,7 @@ app.get("/readyz", (req, res) => {
             podNameGenerated, podNameGenerated
         });
     } else {
-        res.json({
+        res.status(200).json({
             message: "I'm ready!",
             podNameGenerated, podNameGenerated
         });
@@ -90,7 +90,7 @@ app.get("/readyz", (req, res) => {
 });
 
 app.get("/diagz", (req, res) => {
-    res.json({
+    res.status(200).json({
         startupDemo: isStartupMode(),
         livenessDemo: isLivenessMode(),
         uptime: uptime,

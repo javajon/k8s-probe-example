@@ -1,8 +1,8 @@
 FROM node:14 AS build
 WORKDIR /usr/src/app
-COPY src/ ./
 COPY package*.json ./
-RUN ["npm", "install"]
+RUN ["npm", "ci", "--only=production"]
+COPY src/ ./
 
 FROM gcr.io/distroless/nodejs:14
 WORKDIR /app
