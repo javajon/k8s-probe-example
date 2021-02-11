@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         app: probe-example
+        example: startup-pass
     spec:
       containers:
       - name: app
