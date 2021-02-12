@@ -46,17 +46,7 @@ app.get("/uptime", (req, res) => {
     });
 });
 
-app.get("/startupz", (req, res) => {
-    // Startup probe should point to the same endpoint as the liveness probe 
-    // https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#when-should-you-use-a-startup-probe
-    liveness(res);
-});
-
 app.get("/livez", (req, res) => {
-    liveness(res);
-});
-
-function liveness(res) {
     if (isStartupDemo()) {
         res.status(500).json({
             error: "I'm either unborn or a zombie. (uptime " + uptime + " seconds)"
@@ -83,7 +73,7 @@ function liveness(res) {
             podNameGenerated, podNameGenerated
         });
     }
-}
+});
 
 app.get("/readyz", (req, res) => {
     if (isReadinessDemo()) {

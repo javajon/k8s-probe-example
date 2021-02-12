@@ -23,11 +23,20 @@ spec:
         env:
         - name: STARTUP_DURATION
           value: "30"
+          
         startupProbe:
           httpGet:
-            path: /startupz
+            path: /livez
             port: rest
           failureThreshold: 6
           periodSeconds:  10
+
+        livenessProbe:
+          httpGet:
+            path: /livez
+            port: rest
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          failureThreshold: 3
 
 
