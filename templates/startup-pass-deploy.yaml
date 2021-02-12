@@ -25,14 +25,9 @@ spec:
           value: "30"
         startupProbe:
           httpGet:
-            path: /livez
+            path: /startupz
             port: rest
           failureThreshold: 6
           periodSeconds:  10
-        readinessProbe:
-          httpGet:
-            path: /readyz
-            port: rest
-          initialDelaySeconds: 5
-          periodSeconds: 10
-          failureThreshold: 3
+
+

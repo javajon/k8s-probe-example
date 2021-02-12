@@ -21,15 +21,15 @@ function periodicUpdates() {
 
 var cancel = setInterval(periodicUpdates, 1000);
 
-function isStartupMode() {
+function isStartupDemo() {
     return startupCountdown > -1;
 }
 
-function isLivenessMode() {
+function isLivenessDemo() {
     return livenessCountdown > -1;
 }
 
-function isReadinessMode() {
+function isReadinessDemo() {
     return readinessCountdown > -1;
 }
 
@@ -46,12 +46,22 @@ app.get("/uptime", (req, res) => {
     });
 });
 
-app.get("/livez", (req, res) => {
-    if (isStartupMode()) {
+app.get("/startupz", (req, res) => {
+    if (isStartupDemo()) {
         res.status(500).json({
             error: "I'm either unborn or a zombie. (uptime " + uptime + " seconds)"
         });
-    } else if (isLivenessMode()) {
+    } else {
+        res.status(200).json({
+            message: "I'm done starting up. It's all yours. (uptime " + uptime + " seconds)",
+            uptime, uptime,
+            podNameGenerated, podNameGenerated
+        });
+    }
+});
+
+app.get("/livez", (req, res) => {
+    if (isLivenessDemo()) {
         if (livenessCountdown == 0) {
             res.status(500).json({
                 error: "The parasitoid has done it's dirty deed, I'm dead.",
@@ -75,7 +85,7 @@ app.get("/livez", (req, res) => {
 });
 
 app.get("/readyz", (req, res) => {
-    if (readinessCountdown > 0) {
+    if (isReadinessDemo()) {
         res.status(500).json({
             error: "Shut the door, I'm busy!",
             readinessCountdown, readinessCountdown,
@@ -91,8 +101,8 @@ app.get("/readyz", (req, res) => {
 
 app.get("/diagz", (req, res) => {
     res.status(200).json({
-        startupDemo: isStartupMode(),
-        livenessDemo: isLivenessMode(),
+        startupDemo: isStartupDemo(),
+        livenessDemo: isLivenessDemo(),
         uptime: uptime,
         startupCountdown: startupCountdown,
         livenessCountdown: livenessCountdown,
