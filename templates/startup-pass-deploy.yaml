@@ -23,7 +23,7 @@ spec:
         env:
         - name: STARTUP_DURATION
           value: "30"
-          
+
         startupProbe:
           httpGet:
             path: /livez
@@ -38,5 +38,3 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 10
           failureThreshold: 3
-
-
