@@ -58,8 +58,8 @@ app.get("/livez", (req, res) => {
 
 function liveness(res) {
     if (isStartupDemo()) {
-        res.status(200).json({
-            message: "I'm either unborn or a zombie. (uptime " + uptime + " seconds)"
+        res.status(500).json({
+            error: "I'm either unborn or a zombie. (uptime " + uptime + " seconds)"
         });
     }
     else if (isLivenessDemo()) {
