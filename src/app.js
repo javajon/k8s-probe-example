@@ -47,21 +47,22 @@ app.get("/uptime", (req, res) => {
 });
 
 app.get("/startupz", (req, res) => {
-    if (isStartupDemo()) {
-        res.status(500).json({
-            error: "I'm either unborn or a zombie. (uptime " + uptime + " seconds)"
-        });
-    } else {
-        res.status(200).json({
-            message: "I'm done starting up. It's all yours. (uptime " + uptime + " seconds)",
-            uptime, uptime,
-            podNameGenerated, podNameGenerated
-        });
-    }
+    // Startup probe should point to the same endpoint as the liveness probe 
+    // https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#when-should-you-use-a-startup-probe
+    liveness(res);
 });
 
 app.get("/livez", (req, res) => {
-    if (isLivenessDemo()) {
+    liveness(res);
+});
+
+function liveness(res) {
+    if (isStartupDemo()) {
+        res.status(200).json({
+            message: "I'm either unborn or a zombie. (uptime " + uptime + " seconds)"
+        });
+    }
+    else if (isLivenessDemo()) {
         if (livenessCountdown == 0) {
             res.status(500).json({
                 error: "The parasitoid has done it's dirty deed, I'm dead.",
@@ -76,13 +77,13 @@ app.get("/livez", (req, res) => {
             });
         }
     } else {
-        res.status(200).json({
+        res.json({
             message: "I'm alive.",
             uptime, uptime,
             podNameGenerated, podNameGenerated
         });
     }
-});
+}
 
 app.get("/readyz", (req, res) => {
     if (isReadinessDemo()) {
@@ -92,7 +93,7 @@ app.get("/readyz", (req, res) => {
             podNameGenerated, podNameGenerated
         });
     } else {
-        res.status(200).json({
+        res.json({
             message: "I'm ready!",
             podNameGenerated, podNameGenerated
         });
@@ -100,7 +101,7 @@ app.get("/readyz", (req, res) => {
 });
 
 app.get("/diagz", (req, res) => {
-    res.status(200).json({
+    res.json({
         startupDemo: isStartupDemo(),
         livenessDemo: isLivenessDemo(),
         uptime: uptime,
