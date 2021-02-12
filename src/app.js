@@ -70,7 +70,7 @@ function liveness(res) {
                 podNameGenerated, podNameGenerated
             });
         } else {
-            res.status(200).json({
+            res.json({
                 message: "I'm alive, but I have a parasitoid. Uh oh.",
                 livenessCountdown, livenessCountdown,
                 podNameGenerated, podNameGenerated
