@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: startup-fail
+  name: startup
   labels:
     app: probe-example
 spec:
